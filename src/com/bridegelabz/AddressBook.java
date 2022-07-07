@@ -2,21 +2,27 @@ package com.bridegelabz;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 public class AddressBook {
+    ContactDetails person = new ContactDetails();
     List<ContactDetails> contactDetailsList = new ArrayList<ContactDetails>();
     Scanner scanner = new Scanner(System.in);
-
     public void addContact() {
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
         for (int i = 0; i < number; i++) {
-            System.out.println("Enter the contact details of person ");
-            writeContact();
+
+            System.out.println("Enter the first name of person");
+            String fName = scanner.next();
+            if (fName.equals(person.getFirstName())) {
+                System.out.println("The entered person is already exist.");
+            } else {
+                System.out.println("Enter the contact details of person ");
+                writeContact();
+                System.out.println("contact added Successfully");
+            }
         }
     }
     public void writeContact() {
-        ContactDetails person = new ContactDetails();
         System.out.println("Enter First Name : ");
         String firstName = scanner.next();
         System.out.println("Enter Last Name : ");
@@ -35,7 +41,6 @@ public class AddressBook {
         String emailId = scanner.next();
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
         contactDetailsList.add(person);
-
     }
     public void editContact() {
         System.out.println("Enter the first name of person to edit contact");
@@ -44,6 +49,7 @@ public class AddressBook {
         for (int i = 0; i < contactDetailsList.size(); i++) {
             String name = contactDetailsList.get(i).getFirstName();
             if (name.equalsIgnoreCase(editName)) {
+                contactDetailsList.remove(person);
                 writeContact();
                 edited = true;
                 break;
@@ -66,11 +72,11 @@ public class AddressBook {
         if (i < contactDetailsList.size()) {
             contactDetailsList.remove(i);
             System.out.println("Contact Deleted");
-            System.out.println("Remaining contacts in the book isgit");
+            System.out.println("Remaining contacts in the book igsit");
         } else {
             System.out.println("Contact not find");
         }
 
     }
-}
 
+}
