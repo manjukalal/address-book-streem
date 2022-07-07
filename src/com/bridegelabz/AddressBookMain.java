@@ -1,39 +1,35 @@
 package com.bridegelabz;
-
 import java.util.Scanner;
-
 public class AddressBookMain {
-    public static void main(String[] args) {
-        AddressBookMain addressBookMain = new AddressBookMain();
-        addressBookMain.choose();
-    }
     public void choose() {
-        MultipleAddressBook obj = new MultipleAddressBook();
+        MultipleAddressBook object = new MultipleAddressBook();
         while (true) {
-            System.out.println("Enter \n 1. To add The new AddressBook\n 2. To add contact in AddressBook\n " + "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n " + "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 0. to exit");
+            System.out.println("Enter \n 1. To add The new AddressBook\n 2. To add contact in AddressBook\n "
+                    + "3. To edit the contact in AddressBook\n 4. To delete the contact in AddressBook\n 5. To delete the AddressBook\n "
+                    + "6. To Print the AddressBook\n 7. To Print the contacts in AddressBook\n 0. to exit");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    obj.addAddressBook();
+                    object.addAddressBook();
                     break;
                 case 2:
-                    obj.addContact();
+                    object.addContact();
                     break;
                 case 3:
-                    obj.editContactInBook();
+                    object.editContactInBook();
                     break;
                 case 4:
-                    obj.deleteContactInBook();
+                    object.deleteContactInBook();
                     break;
                 case 5:
-                    obj.deleteAddressBook();
+                    object.deleteAddressBook();
                     break;
                 case 6:
-                    obj.printBook();
+                    object.printBook();
                     break;
                 case 7:
-                    obj.printContactsInBook();
+                    object.printContactsInBook();
                     break;
                 case 0:
                     System.exit(0);
@@ -43,5 +39,9 @@ public class AddressBookMain {
             }
         }
     }
-}
+    public static void main(String[] args) {
+        AddressBookMain addressBookMain = new AddressBookMain();
 
+        addressBookMain.choose();
+    }
+}

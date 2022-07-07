@@ -1,5 +1,4 @@
 package com.bridegelabz;
-
 public class ContactDetails {
     private String firstName;
     private String lastName;
