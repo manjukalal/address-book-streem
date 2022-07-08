@@ -1,8 +1,6 @@
 package com.bridegelabz;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -30,7 +28,6 @@ public class AddressBook {
             }
         }
     }
-
     public void writeContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
@@ -90,11 +87,20 @@ public class AddressBook {
 
     }
 
+
     public void sortByName() {
         List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
-        list.stream().sorted((g1, g2) -> g1.getFirstName().compareTo(g2.getFirstName()))
+        list.stream().sorted((g1, g2) -> ((String) g1.getFirstName()).compareTo(g2.getFirstName()))
                 .forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
     }
+
+
+    public void sortByCity() {
+        List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
+        list.stream().sorted((g1, g2) -> ((String) g1.getCity()).compareTo(g2.getCity()))
+                .forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
+    }
+
 
     public void editContact() {
         System.out.println("Enter firstname of contact you want edit");
@@ -172,6 +178,7 @@ public class AddressBook {
             }
         }
     }
+
 
     public void deleteContact() {
         System.out.println("Enter the first name of contact you want to delete");
