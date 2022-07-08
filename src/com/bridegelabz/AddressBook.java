@@ -1,6 +1,7 @@
 package com.bridegelabz;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AddressBook {
@@ -11,23 +12,19 @@ public class AddressBook {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of contacts you want to enter");
         int number = scanner.nextInt();
-
         for (int i = 0; i < number; i++) {
-
-
             System.out.println("Enter the first name of person");
             String fName = scanner.next();
-
             if (fName.equals(person.getFirstName())) {
                 System.out.println("The entered person is already exist. Enter new name");
             } else {
                 System.out.println("Enter the contact details of person ");
-
                 writeContact();
                 System.out.println("contact added Successfully");
             }
         }
     }
+
     public void writeContact() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter First Name : ");
@@ -46,16 +43,13 @@ public class AddressBook {
         long mobileNumber = scanner.nextLong();
         System.out.println("Enter EmailId : ");
         String emailId = scanner.next();
-
         person = new ContactDetails(firstName, lastName, address, city, state, zipCode, mobileNumber, emailId);
         contactDetailsList.add(person);
     }
 
     public void searchByName(String name) {
-
         List<ContactDetails> collect = contactDetailsList.stream().filter(p -> p.getFirstName().equalsIgnoreCase(name))
                 .collect(Collectors.toList());
-
         for (ContactDetails contact : collect) {
             System.out.println("Search result: " + contact);
         }
@@ -84,23 +78,19 @@ public class AddressBook {
             count1 = count1 + count;
         }
         System.out.println("Contact List :" + count1);
-
     }
-
 
     public void sortByName() {
         List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
-        list.stream().sorted((g1, g2) -> ((String) g1.getFirstName()).compareTo(g2.getFirstName()))
+        list.stream().sorted((g1, g2) -> g1.getFirstName().compareTo(g2.getFirstName()))
                 .forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
     }
-
 
     public void sortByCity() {
         List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
-        list.stream().sorted((g1, g2) -> ((String) g1.getCity()).compareTo(g2.getCity()))
+        list.stream().sorted((g1, g2) -> g1.getCity().compareTo(g2.getCity()))
                 .forEach(contact -> System.out.println(contact.getFirstName() + " " + contact.getLastName()));
     }
-
 
     public void editContact() {
         System.out.println("Enter firstname of contact you want edit");
@@ -179,7 +169,6 @@ public class AddressBook {
         }
     }
 
-
     public void deleteContact() {
         System.out.println("Enter the first name of contact you want to delete");
         Scanner scanner = new Scanner(System.in);
@@ -197,7 +186,8 @@ public class AddressBook {
     public void viewByOptions() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. for previous menu");
+            System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. Count Contacts\n"
+                    + "5. Sort the entries Alphabetically\n 0. for previous menu");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -217,6 +207,15 @@ public class AddressBook {
                     searchByState(state);
                     break;
                 case 4:
+                    System.out.println("Enter The Name Of City");
+                    String cityName = scanner.next();
+                    countContactsByUsingCity(cityName);
+                case 5:
+                    sortByName();
+                    break;
+                case 6:
+                    sortByCity();
+                case 0:
                     return;
                 default:
                     System.out.println("Entered choice is incorrect!.. please enter correct choice");

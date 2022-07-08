@@ -1,10 +1,11 @@
 package com.bridegelabz;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class MultipleAddressBook {
-    Map<String, AddressBook> addressBookMap = new HashMap<String, AddressBook>();
+    Map<String, AddressBook> addressBookMap = new HashMap<>();
 
     public void addAddressBook() {
         System.out.println("Enter Name of new Address Book: ");
@@ -24,67 +25,58 @@ public class MultipleAddressBook {
         }
     }
 
-    public void addContact() {
-        System.out.println("Enter the name of Address book to add the contact.");
+    public void addressBookFunctions() {
+        System.out.println("Enter the name of Address book to add, edit or delete the contact.");
         Scanner scanner = new Scanner(System.in);
-        String newContact = scanner.nextLine();
-        AddressBook addressBook = addressBookMap.get(newContact);
-        if (addressBook == null) {
-            System.out.println("No book found");
-
-        } else {
-            addressBookMap.get(newContact).addContact();
+        String bookName = scanner.nextLine();
+        if (addressBookMap.containsKey(bookName)) {
+            addressBookMap.get(bookName);
+            System.out.println("Enter book is present choose the options below to do certain function");
+            while (true) {
+                System.out.println("Enter\n 1. add Contact\n 2. edit contact\n 3. delete contact\n 4. previous menu");
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        addressBookMap.get(bookName).addContact();
+                        break;
+                    case 2:
+                        addressBookMap.get(bookName).editContact();
+                        break;
+                    case 3:
+                        addressBookMap.get(bookName).deleteContact();
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        System.out.println("Entered choice is incorrect!.. please enter correct choice");
+                }
+            }
         }
     }
 
-    public void editContactInBook() {
-        System.out.println("Enter Name of Address Book you want to edit: ");
-        Scanner scanner = new Scanner(System.in);
-        String editBookName = scanner.next();
-        if (addressBookMap.containsKey(editBookName)) {
-            addressBookMap.get(editBookName).editContact();
-        } else {
-            System.out.println("AddressBook doesn't exist, Please enter correct name.");
-            editContactInBook();
-        }
-    }
-
-    public void deleteAddressBook() {
-        System.out.println("Enter Name of Address Book you want to delete: ");
+    public void deleteBook() {
+        System.out.println("Enter the name of Address book to delete.");
         Scanner scanner = new Scanner(System.in);
         String bookName = scanner.next();
         if (addressBookMap.containsKey(bookName)) {
             addressBookMap.remove(bookName);
         } else {
-            System.out.println("AddressBook doesn't exist, Please enter correct name.");
-            deleteAddressBook();
-        }
-    }
-
-    public void deleteContactInBook() {
-        System.out.println("Enter Name of Address Book you want to delete the contacts in it: ");
-        Scanner scanner = new Scanner(System.in);
-        String bookName = scanner.next();
-        if (addressBookMap.containsKey(bookName)) {
-            addressBookMap.get(bookName).deleteContact();
-        } else {
-            System.out.println("AddressBook doesn't exist, Please enter correct name.");
-            deleteContactInBook();
+            System.out.println("No book found");
         }
     }
 
     public void printBook() {
-        System.out.println("These are AddressBooks in program.");
+        System.out.println("These are AddressBooks in present program.");
         for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
             System.out.println(entry.getKey() + "[]");
         }
     }
+
     public void printContactsInBook() {
         for (Map.Entry<String, AddressBook> entry : addressBookMap.entrySet()) {
             System.out.println("The contacts in the Book of < " + entry.getKey() + " > are!...");
             System.out.println(entry.getValue().contactDetailsList);
         }
-        System.out.println(" ");
     }
 
 }
