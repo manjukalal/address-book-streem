@@ -1,6 +1,8 @@
 package com.bridegelabz;
 import java.util.Scanner;
+
 public class AddressBookMain {
+
     public void choose() {
         MultipleAddressBook obj = new MultipleAddressBook();
         while (true) {
@@ -39,6 +41,7 @@ public class AddressBookMain {
             }
         }
     }
+
     public static void main(String[] args) {
         AddressBookMain addressBookMain = new AddressBookMain();
 
